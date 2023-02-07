@@ -1,29 +1,31 @@
-set nocompatible     " skip vi compatibility
-set t_Co=256         " use 256 colors
-syntax enable        " enable syntax highlighting
-set encoding=utf-8   " use UTF-8
-set fileformat=unix  " use unix line endings
-set laststatus=2     " show the status bar
-set number           " show line numbers
-set autoread         " reload files when changed on disk
-set ai               " auto-indent
-set expandtab        " change tabs to spaces
-set shiftwidth=2     " use 2 space indents
-set softtabstop=2    " insert mode tab and backspace use 2 spaces
-set tabstop=2        " actual tabs use 2 spaces
-set list!            " show trailing whitespace, tabs, and long lines
+set nocompatible      " skip vi compatibility
+set t_Co=256          " use 256 colors
+syntax enable         " enable syntax highlighting
+set encoding=utf-8    " use UTF-8
+set fileformat=unix   " use unix line endings
+set laststatus=2      " show the status bar
+set number            " show line numbers
+set relativenumber    " use relative line number
+set autoread          " reload files when changed on disk
+set ai                " auto-indent
+set expandtab         " change tabs to spaces
+set shiftwidth=2      " use 2 space indents
+set softtabstop=2     " insert mode tab and backspace use 2 spaces
+set tabstop=2         " actual tabs use 2 spaces
+set list!             " show trailing whitespace, tabs, and long lines
 set listchars=""
 set listchars+=tab:\▸\ ,trail:▫,extends:→,precedes:←
-set ignorecase       " case insensitive search
-set smartcase        " case sensitive search is used if a capital letter is entered
-set hlsearch         " highlight during searches
-set incsearch        " start searching during typing
-set mouse=a          " allow mouse use everywhere, prevent selecting line numbers
-set wildmenu         " use Tab completion in menus
+set ignorecase        " case insensitive search
+set smartcase         " case sensitive search is used if a capital letter is entered
+set hlsearch          " highlight during searches
+set incsearch         " start searching during typing
+set mouse=a           " allow mouse use everywhere, prevent selecting line numbers
+set wildmenu          " use Tab completion in menus
 set wildmode=list:longest,list:full
-set visualbell t_vb= " turn off visual bell
-set cursorline       " highlight the current line
-set colorcolumn=""   " turn off column highlight
+set visualbell t_vb=  " turn off visual bell
+set cursorline        " highlight the current line
+set colorcolumn=""    " turn off column highlight
+set scrolloff=8       " show lines around cursor
 
 " keybindings
 let mapleader = "\<Space>"
@@ -142,7 +144,7 @@ if has("termguicolors")
 endif
 
 " set background=dark
-" colorscheme base16-ocean
+" colorscheme base16-oceanicnext
 " let g:airline_theme = 'base16'
 " colorscheme night-owl
 " let g:airline_theme = 'night_owl'
@@ -155,7 +157,7 @@ endif
     " let g:airline_theme = 'base16'
   " else
     " set background=dark
-    " colorscheme base16-ocean
+    " colorscheme base16-oceanicnext
     " let g:airline_theme = 'base16'
   " endif
 " endfunc
@@ -182,7 +184,7 @@ endfunc
 function! s:goyo_leave()
   PencilOff
   Limelight!
-  " colorscheme base16-ocean
+  " colorscheme base16-oceanicnext
   " colorscheme night-owl
   " set background=dark
   set nospell
@@ -203,5 +205,5 @@ au BufEnter *.go setlocal softtabstop=8      " insert mode tab and backspace use
 au BufEnter *.go setlocal tabstop=8          " actual tabs are 8 columns
 
 " set column lines to match style guides
-au BufEnter *.py,*.pyw setlocal colorcolumn=80             " PEP-8
-au BufEnter *.js,*.jsx setlocal colorcolumn=100            " Airbnb JS style guide
+au BufEnter *.py,*.pyw setlocal colorcolumn=80                " PEP-8
+au BufEnter *.js,*.jsx,*.ts,*.tsx setlocal colorcolumn=100    " Airbnb JS style guide
