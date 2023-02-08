@@ -21,7 +21,7 @@ sudo apt install git stow
 
 1. Clone this repo into your home directory.
 1. `cd .dotfiles`
-1. `stow [git | prezto | vim | jetbrains]`
+1. `stow [git | zsh | vim | jetbrains]`
 
 ## Notes
 
