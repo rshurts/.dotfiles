@@ -143,9 +143,11 @@ if has("termguicolors")
   set termguicolors
 endif
 
-" set background=dark
-" colorscheme base16-oceanicnext
-" let g:airline_theme = 'base16'
+set background=dark
+
+colorscheme base16-ocean
+let g:airline_theme = 'base16'
+
 " colorscheme night-owl
 " let g:airline_theme = 'night_owl'
 
@@ -157,7 +159,7 @@ endif
     " let g:airline_theme = 'base16'
   " else
     " set background=dark
-    " colorscheme base16-oceanicnext
+    " colorscheme base16-ocean
     " let g:airline_theme = 'base16'
   " endif
 " endfunc
@@ -184,7 +186,7 @@ endfunc
 function! s:goyo_leave()
   PencilOff
   Limelight!
-  " colorscheme base16-oceanicnext
+  " colorscheme base16-ocean
   " colorscheme night-owl
   " set background=dark
   set nospell
