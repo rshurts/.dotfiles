@@ -143,10 +143,10 @@ if has("termguicolors")
   set termguicolors
 endif
 
-set background=dark
+" set background=dark
 
-colorscheme base16-ocean
-let g:airline_theme = 'base16'
+" colorscheme base16-ocean
+" let g:airline_theme = 'base16'
 
 " colorscheme night-owl
 " let g:airline_theme = 'night_owl'
