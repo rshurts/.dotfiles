@@ -1,5 +1,4 @@
 set nocompatible      " skip vi compatibility
-set t_Co=256          " use 256 colors
 syntax enable         " enable syntax highlighting
 set encoding=utf-8    " use UTF-8
 set fileformat=unix   " use unix line endings
@@ -139,9 +138,9 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = {'javascript': ['eslint', 'prettier']}
 
 " colorscheme config
-if has("termguicolors")
-  set termguicolors
-endif
+" if has("termguicolors")
+  " set termguicolors
+" endif
 
 " set background=dark
 
