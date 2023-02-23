@@ -1,5 +1,5 @@
 return {
-    -- git integration
+  -- git integration
   "tpope/vim-fugitive",
 
   -- github integration

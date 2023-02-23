@@ -7,7 +7,7 @@ return {
       "windwp/nvim-ts-autotag",
     },
     config = function()
-      require("nvim-treesitter.configs").setup {
+      require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "css",
           "dockerfile",
@@ -42,7 +42,7 @@ return {
         autotag = {
           enable = true,
         },
-      }
-    end
+      })
+    end,
   },
 }

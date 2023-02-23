@@ -10,12 +10,12 @@ return {
           styles = {
             comments = "italic",
             keywords = "bold",
-            types = "italic,bold",
+            constants = "bold",
           },
         },
       })
       vim.cmd("colorscheme nightfox")
-    end
+    end,
   },
 
   -- comment shortcuts
@@ -90,7 +90,7 @@ return {
           return {
             added = gitsigns.added,
             modified = gitsigns.changed,
-            removed = gitsigns.removed
+            removed = gitsigns.removed,
           }
         end
       end
@@ -98,15 +98,15 @@ return {
       require("lualine").setup({
         extensions = {
           "fugitive",
-          "nvim-tree"
+          "nvim-tree",
         },
         sections = {
           lualine_b = {
-            {'diff', source = diff_source},
+            { "diff", source = diff_source },
             { "b:gitsigns_head", icon = "" },
             {
               "diagnostics",
-              symbols = { error = '✗', warn = '▰', hint = '▱', info = '✧' },
+              symbols = { error = "✗", warn = "▰", hint = "▱", info = "✧" },
             },
           },
           lualine_c = { { "filename", path = 1, symbols = { modified = "[+]", readonly = "[RO]" } } },
@@ -125,6 +125,6 @@ return {
           },
         },
       })
-    end
+    end,
   },
 }
