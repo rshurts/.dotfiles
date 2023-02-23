@@ -128,44 +128,11 @@ return {
       -- to setup format on save
       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-      local eslint_files = {
-        ".eslintrc",
-        ".eslintrc.js",
-        ".eslintrc.cjs",
-        ".eslintrc.yaml",
-        ".eslintrc.yml",
-        ".eslintrc.json",
-        "eslint.config.js",
-      }
-
-      local prettier_files = {
-        ".prettierrc",
-        ".prettierrc.js",
-        ".prettierrc.cjs",
-        ".prettierrc.yaml",
-        ".prettierrc.yml",
-        ".prettierrc.json",
-        ".prettierrc.json5",
-        ".prettierrc.toml",
-        "prettier.config.js",
-        "prettier.config.cjs",
-      }
-
       require("null-ls").setup({
         sources = {
-          formatting.prettier.with({
-            -- only use if prettierrc is provided
-            condition = function(utils)
-              return utils.root_has_file(prettier_files)
-            end,
-          }),
+          formatting.prettier,
           formatting.stylua,
-          diagnostics.eslint_d.with({
-            -- only use if eslintrc is provided
-            condition = function(utils)
-              return utils.root_has_file(eslint_files)
-            end,
-          }),
+          diagnostics.eslint_d,
         },
         -- format on save
         on_attach = function(current_client, bufnr)
