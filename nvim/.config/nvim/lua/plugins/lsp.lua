@@ -130,6 +130,7 @@ return {
 
       require("null-ls").setup({
         sources = {
+          formatting.eslint_d,
           formatting.prettier,
           formatting.stylua,
           diagnostics.eslint_d,
