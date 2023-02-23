@@ -1,13 +1,20 @@
 return {
   -- colorscheme
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
+    "EdenEast/nightfox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-        require("rose-pine").setup()
-        vim.cmd("colorscheme rose-pine")
+      require("nightfox").setup({
+        options = {
+          styles = {
+            comments = "italic",
+            keywords = "bold",
+            types = "italic,bold",
+          },
+        },
+      })
+      vim.cmd("colorscheme nightfox")
     end
   },
 
@@ -50,8 +57,8 @@ return {
               open = "▼",
               empty = "▷",
               empty_open = "▽",
-              symlink = "⮞",
-              symlink_open = "⮟",
+              symlink = "▷",
+              symlink_open = "▽",
             },
             git = {
               unstaged = "○",
