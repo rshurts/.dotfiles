@@ -10,7 +10,7 @@ fi
 # Prezto has its own compile dump, if new completions aren't showing up:
 # `rm -rf .zcompdump`
 # `rm -rf .cache/prezto/zcompdump.zwc` to remove the compiled dump
-# `autoload -Uz compini && compinit`
+# `autoload -Uz compinit && compinit`
 # `mv .zcompdump .cache/prezto/zcompdump`
 # restart terminal
 #
