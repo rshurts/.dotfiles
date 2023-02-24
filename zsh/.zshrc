@@ -23,7 +23,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 fi
 
-
 # Aliases
 alias dockerrm='docker rm -v $(docker ps -a -q)'
 alias dockerrmi='docker rmi $(docker images -q)'
@@ -41,3 +40,7 @@ export PATH=$PATH:/usr/local/go/bin
 # Volta
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# Deno
+export DENO_INSTALL="/Users/russell/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
