@@ -105,7 +105,8 @@ return {
       lspconfig["tsserver"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        root_dir = lspconfig.util.root_pattern("package.json"), -- TODO investigate using tsconfig
+        -- needed for deno lsp to work properly otherwise tsserver also starts and causes problems
+        root_dir = lspconfig.util.root_pattern("package.json"),
         single_file_support = false,
       })
     end,
