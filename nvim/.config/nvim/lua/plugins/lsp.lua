@@ -13,6 +13,7 @@ return {
 
       require("mason-lspconfig").setup({
         ensure_installed = {
+          "denols",
           "gopls",
           "lua_ls",
           "tsserver",
@@ -70,6 +71,12 @@ return {
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+      lspconfig["denols"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+      })
+
       lspconfig["gopls"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
@@ -98,6 +105,8 @@ return {
       lspconfig["tsserver"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
+        root_dir = lspconfig.util.root_pattern("package.json"), -- TODO investigate using tsconfig
+        single_file_support = false,
       })
     end,
   },
@@ -117,8 +126,8 @@ return {
       require("mason-null-ls").setup({
         ensure_installed = {
           "prettier",
-          "stylua",
           "eslint_d",
+          "stylua",
         },
       })
 
@@ -128,13 +137,58 @@ return {
       -- to setup format on save
       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+      local eslint_files = {
+        ".eslintrc",
+        ".eslintrc.js",
+        ".eslintrc.cjs",
+        ".eslintrc.yaml",
+        ".eslintrc.yml",
+        ".eslintrc.json",
+        "eslint.config.js",
+      }
+
+      local prettier_files = {
+        ".prettierrc",
+        ".prettierrc.js",
+        ".prettierrc.cjs",
+        ".prettierrc.yaml",
+        ".prettierrc.yml",
+        ".prettierrc.json",
+        ".prettierrc.json5",
+        ".prettierrc.toml",
+        "prettier.config.js",
+        "prettier.config.cjs",
+      }
+
       require("null-ls").setup({
         sources = {
-          formatting.eslint_d,
-          formatting.prettier,
+          formatting.eslint_d.with({
+            condition = function(utils)
+              return utils.root_has_file(eslint_files)
+            end,
+          }),
+
+          formatting.prettier.with({
+            condition = function(utils)
+              return utils.root_has_file(prettier_files)
+            end,
+          }),
+
+          diagnostics.eslint_d.with({
+            condition = function(utils)
+              return utils.root_has_file(eslint_files)
+            end,
+          }),
+
+          formatting.deno_fmt.with({
+            condition = function(utils)
+              return utils.root_has_file({ "deno.json", "deno.jsonc" })
+            end,
+          }),
+
           formatting.stylua,
-          diagnostics.eslint_d,
         },
+
         -- format on save
         on_attach = function(current_client, bufnr)
           if current_client.supports_method("textDocument/formatting") then
