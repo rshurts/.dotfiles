@@ -34,13 +34,13 @@ else
 fi
 
 # Go
-export GOPATH=$HOME/Developer/Go
-export PATH=$PATH:/usr/local/go/bin
+export GOPATH="$HOME/Developer/Go"
+export PATH="/usr/local/go/bin:$PATH"
 
 # Volta
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Deno
-export DENO_INSTALL="/Users/russell/.deno"
+export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
