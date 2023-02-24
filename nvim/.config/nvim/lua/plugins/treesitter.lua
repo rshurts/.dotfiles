@@ -22,6 +22,7 @@ return {
           "markdown_inline",
           "rust",
           "typescript",
+          "tsx",
           "vim",
         },
         -- Automatically install missing parsers when entering buffer
