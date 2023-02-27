@@ -6,7 +6,7 @@
 [alias]
 	ls = log --pretty=format:'%C(yellow)%h%Creset %C(dim cyan)%an%Creset %C(bold blue)%cr%Creset - %C(normal)%s%Creset' --abbrev-commit --stat
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.gitignore_global
 [push]
 	autoSetupRemote = true
