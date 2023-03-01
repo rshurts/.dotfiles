@@ -59,6 +59,21 @@ return {
         vim.keymap.set("n", "<space>wl", function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, bufopts)
+
+        vim.api.nvim_create_autocmd("CursorHold", {
+          buffer = bufnr,
+          callback = function()
+            local options = {
+              focusable = false,
+              close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+              border = "rounded",
+              source = "always",
+              prefix = " ",
+              scope = "cursor",
+            }
+            vim.diagnostic.open_float(nil, options)
+          end,
+        })
       end
 
       -- customize diagnostics signs
@@ -189,7 +204,6 @@ return {
 
           formatting.stylua,
         },
-
         -- format on save
         on_attach = function(current_client, bufnr)
           if current_client.supports_method("textDocument/formatting") then
