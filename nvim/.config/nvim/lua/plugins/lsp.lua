@@ -16,6 +16,7 @@ return {
           "denols",
           "gopls",
           "lua_ls",
+          "prismals",
           "tsserver",
         },
       })
