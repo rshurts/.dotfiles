@@ -10,6 +10,10 @@ k.set("i", "kj", "<esc>")
 k.set("n", "<C-d>", "<C-d>zz")
 k.set("n", "<C-u>", "<C-u>zz")
 
+-- center cursor on next & previous selection
+k.set("n", "n", "nzz")
+k.set("n", "N", "Nzz")
+
 -- keep the yank register when putting
 k.set("x", "<leader>p", [["_dP]])
 
