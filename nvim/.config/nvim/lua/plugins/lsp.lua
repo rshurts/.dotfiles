@@ -13,6 +13,7 @@ return {
 
       require("mason-lspconfig").setup({
         ensure_installed = {
+          "astro",
           "denols",
           "gopls",
           "lua_ls",
@@ -87,6 +88,10 @@ return {
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+      lspconfig["astro"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
       lspconfig["denols"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
