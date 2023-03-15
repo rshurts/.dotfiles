@@ -18,6 +18,7 @@ return {
           "gopls",
           "lua_ls",
           "prismals",
+          "rust_analyzer",
           "tsserver",
         },
       })
@@ -124,6 +125,11 @@ return {
       })
 
       lspconfig["prismals"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
+      lspconfig["rust_analyzer"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })
