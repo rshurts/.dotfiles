@@ -160,6 +160,7 @@ return {
         ensure_installed = {
           "prettier",
           "eslint_d",
+          "rustfmt",
           "stylua",
         },
       })
@@ -218,6 +219,8 @@ return {
               return utils.root_has_file({ "deno.json", "deno.jsonc" })
             end,
           }),
+
+          formatting.rustfmt,
 
           formatting.stylua,
         },
