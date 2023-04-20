@@ -35,7 +35,7 @@ fi
 
 # Go
 export GOPATH="$HOME/Developer/Go"
-export PATH="/usr/local/go/bin:$PATH"
+export PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
 
 # Volta
 export VOLTA_HOME="$HOME/.volta"
