@@ -14,7 +14,6 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "astro",
-          "denols",
           "gopls",
           "lua_ls",
           "prismals",
@@ -93,11 +92,6 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
       })
-      lspconfig["denols"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-      })
 
       lspconfig["gopls"].setup({
         capabilities = capabilities,
@@ -137,7 +131,6 @@ return {
       lspconfig["tsserver"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        -- needed for deno lsp to work properly otherwise tsserver also starts and causes problems
         root_dir = lspconfig.util.root_pattern("package.json"),
         single_file_support = false,
       })
@@ -211,12 +204,6 @@ return {
           diagnostics.eslint_d.with({
             condition = function(utils)
               return utils.root_has_file(eslint_files)
-            end,
-          }),
-
-          formatting.deno_fmt.with({
-            condition = function(utils)
-              return utils.root_has_file({ "deno.json", "deno.jsonc" })
             end,
           }),
 
