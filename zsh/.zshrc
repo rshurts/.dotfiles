@@ -40,3 +40,9 @@ export PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
 # Volta
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# Rust
+export PATH="$HOME/.cargo/env:$PATH"
+
+# Python (Linux)
+export PATH="$HOME/.local/bin:$PATH"
