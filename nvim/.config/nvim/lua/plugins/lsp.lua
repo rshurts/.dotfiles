@@ -16,9 +16,8 @@ return {
           "astro",
           "gopls",
           "lua_ls",
-          "prismals",
           "rust_analyzer",
-          "tsserver",
+          "ts_ls",
         },
       })
 
@@ -118,17 +117,12 @@ return {
         },
       })
 
-      lspconfig["prismals"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
       lspconfig["rust_analyzer"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })
 
-      lspconfig["tsserver"].setup({
+      lspconfig["ts_ls"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
         root_dir = lspconfig.util.root_pattern("package.json"),

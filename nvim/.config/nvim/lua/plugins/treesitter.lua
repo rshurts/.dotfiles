@@ -15,7 +15,6 @@ return {
           "dockerfile",
           "go",
           "graphql",
-          "help",
           "html",
           "javascript",
           "json",
