@@ -46,3 +46,14 @@ export PATH="$HOME/.cargo/env:$PATH"
 
 # Python (Linux)
 export PATH="$HOME/.local/bin:$PATH"
+
+# Deno
+. "/Users/russell/.deno/env"
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/russell/.zsh/completions:"* ]]; then export FPATH="/Users/russell/.zsh/completions:$FPATH"; fi
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+# Bun completions
+[ -s "/Users/russell/.bun/_bun" ] && source "/Users/russell/.bun/_bun"
