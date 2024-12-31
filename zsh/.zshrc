@@ -47,11 +47,6 @@ export PATH="$HOME/.cargo/env:$PATH"
 # Python (Linux)
 export PATH="$HOME/.local/bin:$PATH"
 
-# Deno
-. "$HOME/.deno/env"
-# Add deno completions to search path
-if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH="$HOME/.zsh/completions:$FPATH"; fi
-
 # Bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
