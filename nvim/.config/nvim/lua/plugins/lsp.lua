@@ -1,11 +1,25 @@
 return {
-  -- language server protocol
+  -- language server protocol (LSP) plugins
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  { "Bilal2453/luvit-meta", lazy = true },
+
+  -- TODO: refactor and update based on work in kickstart to use new linting and formating plugins
+  -- language server protocol (LSP)
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
-      "williamboman/mason.nvim",
+      { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
@@ -13,7 +27,6 @@ return {
 
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "astro",
           "gopls",
           "lua_ls",
           "rust_analyzer",
@@ -78,7 +91,7 @@ return {
       end
 
       -- customize diagnostics signs
-      local signs = { Error = "✗ ", Warn = "▰ ", Hint = "▱ ", Info = "✧ " }
+      local signs = { Error = "■ ", Warn = "■ ", Hint = "■ ", Info = "■ " }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -86,11 +99,6 @@ return {
 
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      lspconfig["astro"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
 
       lspconfig["gopls"].setup({
         capabilities = capabilities,

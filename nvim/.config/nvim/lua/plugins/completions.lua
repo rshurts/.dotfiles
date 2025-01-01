@@ -21,6 +21,8 @@ return {
     opts = function()
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       local cmp = require("cmp")
+      local luasnip = require("luasnip")
+      luasnip.config.setup({})
 
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
@@ -52,6 +54,7 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           -- accept currently selected item, set `select` to `false` to only confirm explicitly selected items.
+          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         snippet = {
@@ -60,6 +63,7 @@ return {
           end,
         },
         sources = cmp.config.sources({
+          { name = "lazydev", group_index = 0 },
           { name = "nvim_lsp" },
           { name = "luasnip" },
         }, {
