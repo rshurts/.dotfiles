@@ -25,10 +25,11 @@ k.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 k.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- splits
-k.set("n", "<leader>h", "<C-w>h")
-k.set("n", "<leader>j", "<C-w>j")
-k.set("n", "<leader>k", "<C-w>k")
-k.set("n", "<leader>l", "<C-w>l")
+k.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+k.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+k.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+k.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- highlights
 k.set("n", "<leader>nn", ":nohl<cr>")
+k.set('n', '<Esc>', '<cmd>nohlsearch<CR>') -- Clear highlights on search when pressing <Esc> in normal mode
