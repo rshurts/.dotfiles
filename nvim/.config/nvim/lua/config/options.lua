@@ -18,7 +18,7 @@ o.breakindent = true -- indent wrapped lines at the same level
 -- line wrap & whitespace
 o.wrap = false
 o.list = true -- show trailing whitespace, tabs, and long lines
-o.listchars = { tab = "▸ ", trail = "▫", extends = "→", precedes = "←", nbsp = '␣' }
+o.listchars = { tab = "▸ ", trail = "▫", extends = "→", precedes = "←", nbsp = "␣" }
 
 -- search
 o.hlsearch = true -- turn on search highlight
@@ -27,7 +27,7 @@ o.smartcase = true -- case sensitive search is used if a capital letter is enter
 o.incsearch = true -- start searching during typing
 
 -- substitutions
-o.inccommand = 'split' -- Preview substitutions live, as you type!
+o.inccommand = "split" -- Preview substitutions live, as you type!
 
 -- cursor
 o.cursorline = true -- highlight the line the cursor is on
@@ -36,7 +36,6 @@ o.mouse = "a" -- allow mouse use everywhere, prevent selecting line numbers
 
 -- appearance
 o.updatetime = 250 -- reduce update time
-o.timeoutlen = 300 -- reduce mapped sequence timeout
 o.signcolumn = "yes" -- always show the sign column
 o.termguicolors = true -- use 24-bit color
 
