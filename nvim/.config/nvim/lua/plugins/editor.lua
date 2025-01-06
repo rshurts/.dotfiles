@@ -109,50 +109,76 @@ return {
     },
   },
 
-  -- TODO: switch to neo-tree
   -- tree explorer
   {
-    "nvim-tree/nvim-tree.lua",
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    cmd = "Neotree",
     keys = {
-      { "<leader><Tab>", "<cmd>NvimTreeToggle<cr>", desc = "Toggle NvimTree" },
+      { "\\", ":Neotree reveal<CR>", desc = "Neotree reveal", silent = true },
     },
     opts = {
-      git = {
-        ignore = false,
-      },
-      renderer = {
-        icons = {
-          git_placement = "after",
-          glyphs = {
-            default = "",
-            symlink = "",
-            bookmark = "",
+      default_component_configs = {
+        diagnostics = {
+          symbols = {
+            hint = "■",
+            info = "■",
+            warn = "■",
+            error = "■",
+          },
+          highlights = {
+            hint = "DiagnosticSignHint",
+            info = "DiagnosticSignInfo",
+            warn = "DiagnosticSignWarn",
+            error = "DiagnosticSignError",
+          },
+        },
+        indent = {
+          expander_collapsed = "▷",
+          expander_expanded = "▽",
+        },
+        icon = {
+          folder_closed = "▶",
+          folder_open = "▼",
+          folder_empty = "▷",
+          folder_empty_open = "▽",
+          default = "",
+        },
+        git_status = {
+          symbols = {
+            -- Change type
+            added = "",
             modified = "",
-            folder = {
-              arrow_closed = "▶",
-              arrow_open = "▼",
-              default = "▶",
-              open = "▼",
-              empty = "▷",
-              empty_open = "▽",
-              symlink = "▷",
-              symlink_open = "▽",
-            },
-            git = {
-              unstaged = "○",
-              staged = "◉",
-              unmerged = "●",
-              renamed = "→",
-              untracked = "◌",
-              deleted = "✗",
-              ignored = "",
-            },
+            deleted = "",
+            renamed = "",
+            -- Status type
+            untracked = "○",
+            ignored = "",
+            unstaged = "●",
+            staged = "◉",
+            conflict = "■",
           },
-          show = {
-            file = false,
-            folder = false,
+        },
+        symlink_target = {
+          enabled = true,
+          text_format = " → %s", -- %s will be replaced with the symlink target's path.
+        },
+      },
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_gitignore = false,
+          hide_hidden = false,
+        },
+        window = {
+          mappings = {
+            ["\\"] = "close_window",
           },
-          symlink_arrow = " → ",
+          position = "right",
         },
       },
     },
@@ -176,7 +202,7 @@ return {
       require("lualine").setup({
         extensions = {
           "fugitive",
-          "nvim-tree", -- TODO: switch to neo-tree
+          "neo-tree",
         },
         sections = {
           lualine_b = {
