@@ -1,5 +1,5 @@
 return {
-  -- treesitter with auto-tag
+  -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -9,7 +9,6 @@ return {
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
-          "astro",
           "bash",
           "css",
           "dockerfile",
@@ -21,7 +20,6 @@ return {
           "lua",
           "markdown",
           "markdown_inline",
-          "prisma",
           "python",
           "rust",
           "scss",
@@ -53,13 +51,15 @@ return {
         indent = {
           enable = true,
         },
-        -- enable autotagging with nvim-ts-autotag
+        -- enable autoclose and autorename of html tags
         autotag = {
           enable = true,
         },
       })
     end,
   },
+
+  -- sticky context of selection to top of screen
   {
     "nvim-treesitter/nvim-treesitter-context",
     config = true,

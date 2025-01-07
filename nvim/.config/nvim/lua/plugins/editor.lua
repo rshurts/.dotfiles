@@ -18,63 +18,167 @@ return {
     end,
   },
 
+  -- detect tabstop and shiftwidth automatically
+  {
+    "tpope/vim-sleuth",
+  },
+
   -- comment shortcuts
   {
     "numToStr/comment.nvim",
     config = true,
   },
 
+  -- highlight todo comments
+  {
+    "folke/todo-comments.nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { signs = false },
+  },
+
+  -- indentation guides
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
+  },
+
   -- visualize undo history
   {
     "mbbill/undotree",
     keys = {
-      { "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Undotree" },
+      { "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Undo tree" },
     },
   },
 
-  -- file explorer
+  -- keybinding popup
   {
-    "nvim-tree/nvim-tree.lua",
+    "folke/which-key.nvim",
+    event = "VimEnter", -- Sets the loading event to 'VimEnter'
+    opts = {
+      -- delay between pressing a key and opening which-key (milliseconds)
+      -- this setting is independent of vim.opt.timeoutlen
+      delay = 0,
+      icons = {
+        mappings = false,
+        -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+        -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
+        keys = {
+          Up = "<Up> ",
+          Down = "<Down> ",
+          Left = "<Left> ",
+          Right = "<Right> ",
+          C = "<C-…> ",
+          M = "<M-…> ",
+          D = "<D-…> ",
+          S = "<S-…> ",
+          CR = "<CR> ",
+          Esc = "<Esc> ",
+          ScrollWheelDown = "<ScrollWheelDown> ",
+          ScrollWheelUp = "<ScrollWheelUp> ",
+          NL = "<NL> ",
+          BS = "<BS> ",
+          Space = "<Space> ",
+          Tab = "<Tab> ",
+          F1 = "<F1>",
+          F2 = "<F2>",
+          F3 = "<F3>",
+          F4 = "<F4>",
+          F5 = "<F5>",
+          F6 = "<F6>",
+          F7 = "<F7>",
+          F8 = "<F8>",
+          F9 = "<F9>",
+          F10 = "<F10>",
+          F11 = "<F11>",
+          F12 = "<F12>",
+        },
+      },
+
+      -- Document existing key chains
+      spec = {
+        { "<leader>c", group = "Code", mode = { "n", "x" } },
+        { "<leader>d", group = "Document" },
+        { "<leader>r", group = "Rename" },
+        { "<leader>s", group = "Search" },
+        { "<leader>w", group = "Workspace" },
+        { "<leader>t", group = "Toggle" },
+        { "<leader>h", group = "Git hunk", mode = { "n", "v" } },
+      },
+    },
+  },
+
+  -- tree explorer
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    cmd = "Neotree",
     keys = {
-      { "<leader><Tab>", "<cmd>NvimTreeToggle<cr>", desc = "NvimTree" },
+      { "\\", ":Neotree reveal<CR>", desc = "Neotree reveal", silent = true },
     },
     opts = {
-      git = {
-        ignore = false,
-      },
-      renderer = {
-        icons = {
-          git_placement = "after",
-          glyphs = {
-            default = "",
-            symlink = "",
-            bookmark = "",
+      default_component_configs = {
+        diagnostics = {
+          symbols = {
+            hint = "■",
+            info = "■",
+            warn = "■",
+            error = "■",
+          },
+          highlights = {
+            hint = "DiagnosticSignHint",
+            info = "DiagnosticSignInfo",
+            warn = "DiagnosticSignWarn",
+            error = "DiagnosticSignError",
+          },
+        },
+        indent = {
+          expander_collapsed = "▷",
+          expander_expanded = "▽",
+        },
+        icon = {
+          folder_closed = "▶",
+          folder_open = "▼",
+          folder_empty = "▷",
+          folder_empty_open = "▽",
+          default = "",
+        },
+        git_status = {
+          symbols = {
+            -- Change type
+            added = "",
             modified = "",
-            folder = {
-              arrow_closed = "▶",
-              arrow_open = "▼",
-              default = "▶",
-              open = "▼",
-              empty = "▷",
-              empty_open = "▽",
-              symlink = "▷",
-              symlink_open = "▽",
-            },
-            git = {
-              unstaged = "○",
-              staged = "◉",
-              unmerged = "●",
-              renamed = "→",
-              untracked = "◌",
-              deleted = "✗",
-              ignored = "",
-            },
+            deleted = "",
+            renamed = "",
+            -- Status type
+            untracked = "○",
+            ignored = "",
+            unstaged = "●",
+            staged = "◉",
+            conflict = "■",
           },
-          show = {
-            file = false,
-            folder = false,
+        },
+        symlink_target = {
+          enabled = true,
+          text_format = " → %s", -- %s will be replaced with the symlink target's path.
+        },
+      },
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_gitignore = false,
+          hide_hidden = false,
+        },
+        window = {
+          mappings = {
+            ["\\"] = "close_window",
           },
-          symlink_arrow = " → ",
+          position = "right",
         },
       },
     },
@@ -98,7 +202,7 @@ return {
       require("lualine").setup({
         extensions = {
           "fugitive",
-          "nvim-tree",
+          "neo-tree",
         },
         sections = {
           lualine_b = {
@@ -106,25 +210,23 @@ return {
             { "b:gitsigns_head", icon = "" },
             {
               "diagnostics",
-              symbols = { error = "✗", warn = "▰", hint = "▱", info = "✧" },
+              symbols = { error = "■", warn = "■", hint = "■", info = "■" },
             },
           },
-          lualine_c = { { "filename", path = 1, symbols = { modified = "[+]", readonly = "[RO]" } } },
-          lualine_x = {
-            "encoding",
-            {
-              "fileformat",
-              icons_enabled = true,
-              symbols = {
-                unix = "unix",
-                dos = "dos",
-                mac = "mac",
-              },
-            },
-            "filetype",
-          },
+          lualine_c = { { "filename", path = 1 } },
+          lualine_x = { "filetype" },
         },
       })
+    end,
+  },
+
+  -- utilies
+  {
+    "echasnovski/mini.nvim",
+    config = function()
+      require("mini.ai").setup({ n_lines = 500 })
+      require("mini.pairs").setup()
+      require("mini.surround").setup()
     end,
   },
 }
