@@ -202,8 +202,8 @@ return {
       end,
       formatters_by_ft = {
         javascript = { "eslint_d", "prettier" },
-        typescript = { "eslint_d", "prettier" },
         javascriptreact = { "eslint_d", "prettier" },
+        typescript = { "eslint_d", "prettier" },
         typescriptreact = { "eslint_d", "prettier" },
         css = { "prettier" },
         html = { "prettier" },
@@ -228,13 +228,6 @@ return {
     config = function()
       local lint = require("lint")
 
-      lint.linters_by_ft = {
-        javascript = { "eslint_d" },
-        typescript = { "eslint_d" },
-        javascriptreact = { "eslint_d" },
-        typescriptreact = { "eslint_d" },
-      }
-
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
       vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
@@ -253,29 +246,4 @@ return {
       end, { desc = "Lint buffer" })
     end,
   },
-
-  -- TODO: Only lint or format if config files are present
-  --
-  -- local eslint_files = {
-  --   ".eslintrc",
-  --   ".eslintrc.js",
-  --   ".eslintrc.cjs",
-  --   ".eslintrc.yaml",
-  --   ".eslintrc.yml",
-  --   ".eslintrc.json",
-  --   "eslint.config.js",
-  -- }
-  --
-  -- local prettier_files = {
-  --   ".prettierrc",
-  --   ".prettierrc.js",
-  --   ".prettierrc.cjs",
-  --   ".prettierrc.yaml",
-  --   ".prettierrc.yml",
-  --   ".prettierrc.json",
-  --   ".prettierrc.json5",
-  --   ".prettierrc.toml",
-  --   "prettier.config.js",
-  --   "prettier.config.cjs",
-  -- }
 }
