@@ -131,6 +131,7 @@ return {
             },
           },
         },
+        rust_analyzer = {},
         ts_ls = {
           root_dir = require("lspconfig").util.root_pattern("package.json"),
           single_file_support = false,
@@ -144,8 +145,9 @@ return {
 
       -- NOTE: Add formatters and linters here
       vim.list_extend(ensure_installed, {
-        "prettier",
         "eslint_d",
+        "prettier",
+        "rustfmt",
         "stylua",
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -210,6 +212,7 @@ return {
         markdown = { "prettier" },
         graphql = { "prettier" },
         go = { "goimports", "gofmt" },
+        rust = { "rustfmt" },
         lua = { "stylua" },
       },
     },
