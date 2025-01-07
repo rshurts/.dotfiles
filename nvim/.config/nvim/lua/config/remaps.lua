@@ -37,5 +37,4 @@ k.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease split w
 k.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase split width" })
 
 -- highlights
-k.set("n", "<leader>nn", ":nohl<cr>", { desc = "Clear search highlights" })
 k.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" }) -- Clear highlights on search when pressing <Esc> in normal mode
