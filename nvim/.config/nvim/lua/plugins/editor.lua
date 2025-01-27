@@ -170,9 +170,10 @@ return {
       },
       filesystem = {
         filtered_items = {
-          hide_dotfiles = false,
-          hide_gitignore = false,
-          hide_hidden = false,
+          visible = true,
+          hide_dotfiles = true,
+          hide_gitignore = true,
+          hide_hidden = true,
         },
         window = {
           mappings = {
