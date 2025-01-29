@@ -149,6 +149,8 @@ return {
         "prettier",
         "rustfmt",
         "stylua",
+        "markdownlint",
+        "jsonlint",
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -227,6 +229,10 @@ return {
     },
     config = function()
       local lint = require("lint")
+
+      lint.linters_by_ft = {
+        markdown = { "markdownlint" },
+      }
 
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
