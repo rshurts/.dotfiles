@@ -2,6 +2,7 @@ local o = vim.opt
 
 -- config
 o.undofile = true -- permant undo history
+o.showmode = false -- use the mode shown in the status bar
 
 -- line numbers
 o.number = true -- use line numbers
