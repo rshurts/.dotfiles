@@ -3,6 +3,10 @@ set ignorecase          " case insensitive search
 set smartcase           " case sensitive search is used if a capital letter is entered
 set incsearch           " start searching during typing
 set visualbell t_vb=    " turn off visual bell
+set ignorecase          " case insensitive search
+set smartcase           " case sensitive search is used if a capital letter is entered
+set hlsearch            " highlight during searches
+set incsearch           " start searching during typing
 
 " keybindings
 let mapleader = "\<Space>"
@@ -11,6 +15,7 @@ nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 nnoremap n nzz
 nnoremap N Nzz
+nnoremap <Esc> :nohl<CR>
 
 " because I hold shift too long
 command W w
