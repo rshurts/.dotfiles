@@ -136,6 +136,7 @@ return {
           root_dir = require("lspconfig").util.root_pattern("package.json"),
           single_file_support = false,
         },
+        biome = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -202,17 +203,27 @@ return {
           lsp_format = lsp_format_opt,
         }
       end,
+      -- Require config files in the project directory to enable formatters.
+      formater = {
+        biome = {
+          require_cwd = true,
+        },
+        prettier = {
+          require_cwd = true,
+        },
+      },
       formatters_by_ft = {
-        javascript = { "eslint_d", "prettier" },
-        javascriptreact = { "eslint_d", "prettier" },
-        typescript = { "eslint_d", "prettier" },
-        typescriptreact = { "eslint_d", "prettier" },
-        css = { "prettier" },
+        javascript = { "biome", "prettier" },
+        javascriptreact = { "biome", "prettier" },
+        typescript = { "biome", "prettier" },
+        typescriptreact = { "biome", "prettier" },
+        css = { "biome", "prettier" },
         html = { "prettier" },
-        json = { "prettier" },
+        json = { "biome", "prettier" },
+        jsonc = { "biome", "prettier" },
         yaml = { "prettier" },
         markdown = { "prettier" },
-        graphql = { "prettier" },
+        graphql = { "biome", "prettier" },
         go = { "goimports", "gofmt" },
         rust = { "rustfmt" },
         lua = { "stylua" },
