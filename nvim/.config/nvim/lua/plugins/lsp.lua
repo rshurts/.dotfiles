@@ -204,7 +204,7 @@ return {
         }
       end,
       -- Require config files in the project directory to enable formatters.
-      formater = {
+      formatters = {
         biome = {
           require_cwd = true,
         },
