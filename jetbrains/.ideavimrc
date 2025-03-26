@@ -11,6 +11,7 @@ set incsearch           " start searching during typing
 " keybindings
 let mapleader = "\<Space>"
 inoremap kj <Esc>
+vnoremap kj <Esc>
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 nnoremap n nzz

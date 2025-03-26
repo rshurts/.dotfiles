@@ -5,6 +5,8 @@ vim.g.mapleader = " "
 
 -- kj to quickly leave insert mode
 k.set("i", "kj", "<esc>")
+-- kj to quickly leave visual mode
+k.set("v", "kj", "<esc>")
 
 -- center cursor on up & down
 k.set("n", "<C-d>", "<C-d>zz")
