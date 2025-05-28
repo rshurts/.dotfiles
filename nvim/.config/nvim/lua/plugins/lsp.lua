@@ -148,7 +148,6 @@ return {
       vim.list_extend(ensure_installed, {
         "eslint_d",
         "prettier",
-        "rustfmt",
         "stylua",
         "markdownlint",
         "jsonlint",
