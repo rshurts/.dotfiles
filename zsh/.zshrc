@@ -34,7 +34,7 @@ else
 fi
 
 # Mise
-eval "$(/home/russell/.local/bin/mise activate zsh)"
+eval "$($HOME/.local/bin/mise activate zsh)"
 
 # Go
 export GOPATH="$HOME/Developer/Go"
