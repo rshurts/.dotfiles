@@ -36,6 +36,9 @@ fi
 # Mise
 eval "$(/home/russell/.local/bin/mise activate zsh)"
 
+# Go
+export GOPATH="$HOME/Developer/Go"
+
 # Bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
