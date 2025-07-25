@@ -98,13 +98,11 @@ return {
 
       -- Document existing key chains
       spec = {
-        { "<leader>c", group = "Code", mode = { "n", "x" } },
-        { "<leader>d", group = "Document" },
-        { "<leader>r", group = "Rename" },
-        { "<leader>s", group = "Search" },
-        { "<leader>w", group = "Workspace" },
+        { "<leader>f", group = "Fuzzy Find" },
         { "<leader>t", group = "Toggle" },
-        { "<leader>h", group = "Git hunk", mode = { "n", "v" } },
+        { "<leader>b", group = "Buffer" },
+        { "<leader>d", group = "Diagnostics" },
+        { "<leader>c", group = "Code", mode = { "n", "x" } },
       },
     },
   },
@@ -180,7 +178,6 @@ return {
           mappings = {
             ["\\"] = "close_window",
           },
-          position = "right",
         },
       },
     },

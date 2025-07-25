@@ -16,8 +16,8 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
-      { "williamboman/mason.nvim", config = true },
-      "williamboman/mason-lspconfig.nvim",
+      { "mason-org/mason.nvim", config = true },
+      "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
@@ -35,12 +35,12 @@ return {
           map("gr", require("telescope.builtin").lsp_references, "Go to references")
           map("gI", require("telescope.builtin").lsp_implementations, "Go to implementation")
           map("gt", require("telescope.builtin").lsp_type_definitions, "Go to type definition")
-          map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "Fuzzy find document symbols")
-          map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Fuzzy find workspace symbols")
-          map("<leader>rn", vim.lsp.buf.rename, "Rename")
-          map("<leader>ca", vim.lsp.buf.code_action, "Code action", { "n", "x" })
-          map("<space>e", vim.diagnostic.open_float, "Open diagnostics float")
-          map("<space>q", vim.diagnostic.setloclist, "Set diagnostics location list")
+          map("gN", vim.lsp.buf.rename, "Rename")
+          map("gA", vim.lsp.buf.code_action, "Code action", { "n", "x" })
+          map("<leader>fs", require("telescope.builtin").lsp_document_symbols, "Fuzzy find document symbols")
+          map("<leader>fw", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Fuzzy find workspace symbols")
+          map("<space>de", vim.diagnostic.open_float, "Open diagnostics float")
+          map("<space>dq", vim.diagnostic.setloclist, "Set diagnostics location list")
           map("[d", vim.diagnostic.goto_prev, "Go to previous diagnostic sign")
           map("]d", vim.diagnostic.goto_next, "Go to next diagnostic sign")
 
@@ -50,7 +50,10 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if
+            client
+            and client.supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
+          then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
@@ -92,7 +95,7 @@ return {
           -- The following code creates a keymap to toggle inlay hints in your
           -- code, if the language server you are using supports them
           -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client.supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
             map("<leader>th", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "Toggle inlay hints")
@@ -176,7 +179,7 @@ return {
     cmd = { "ConformInfo" },
     keys = {
       {
-        "<leader>fo",
+        "<leader>bf",
         function()
           require("conform").format({ async = true, lsp_format = "fallback" })
         end,
@@ -255,7 +258,7 @@ return {
         end,
       })
 
-      vim.keymap.set("n", "<leader>li", function()
+      vim.keymap.set("n", "<leader>bl", function()
         if vim.opt_local.modifiable:get() then
           lint.try_lint()
         end
