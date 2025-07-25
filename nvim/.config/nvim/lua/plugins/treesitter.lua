@@ -21,6 +21,7 @@ return {
           "markdown",
           "markdown_inline",
           "python",
+          "ruby",
           "rust",
           "scss",
           "toml",

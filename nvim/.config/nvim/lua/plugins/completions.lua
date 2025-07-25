@@ -55,6 +55,7 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           -- accept currently selected item, set `select` to `false` to only confirm explicitly selected items.
           ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         snippet = {
           expand = function(args)
