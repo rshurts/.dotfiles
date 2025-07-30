@@ -179,7 +179,7 @@ return {
     cmd = { "ConformInfo" },
     keys = {
       {
-        "<leader>bf",
+        "<leader>lf",
         function()
           require("conform").format({ async = true, lsp_format = "fallback" })
         end,
@@ -258,7 +258,7 @@ return {
         end,
       })
 
-      vim.keymap.set("n", "<leader>bl", function()
+      vim.keymap.set("n", "<leader>ll", function()
         if vim.opt_local.modifiable:get() then
           lint.try_lint()
         end
