@@ -101,7 +101,6 @@ return {
         { "<leader>f", group = "Fuzzy Find" },
         { "<leader>t", group = "Toggle" },
         { "<leader>l", group = "Language" },
-        { "<leader>b", group = "Buffer" },
         { "<leader>d", group = "Diagnostics" },
         { "<leader>h", group = "Harpoon" },
         { "<leader>c", group = "Code", mode = { "n", "x" } },
