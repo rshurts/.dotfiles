@@ -41,9 +41,32 @@ zstyle ':completion:*' menu select $  # Enables a menu for multiple completions 
 zstyle ':completion:*' list-prompt ''  # Removes the prompt
 zstyle ':completion:*' list-lines 0  # Show all possibilities
 
-# Initialize the completion system
+# Use a compiled dump, slower on initial startup, but faster afterwards
+ZCOMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
+ZCOMPDUMP_ZWC="${ZCOMPDUMP}.zwc"
+
 autoload -Uz compinit
-compinit -C # skip check if .zcompdump exists, will need to delete if new completions are added
+
+# ensure compinit dump exists
+if [[ ! -f $ZCOMPDUMP ]]; then
+  compinit -d "$ZCOMPDUMP"
+fi
+
+# If .zcompdump is newer than the .zwc (or zwc missing), attempt to compile it.
+# capture errors so startup won't break if compilation fails.
+if [[ ! -f $ZCOMPDUMP_ZWC || $ZCOMPDUMP -nt $ZCOMPDUMP_ZWC ]]; then
+  if ! zcompile "$ZCOMPDUMP" 2>/tmp/zcompile.err; then
+    # compilation failed — remove bad zwc and keep going (fallback to text dump)
+    rm -f "$ZCOMPDUMP_ZWC"
+    # (optional) log failure for debugging:
+    # echo "zcompile failed: $(< /tmp/zcompile.err)" >&2
+    rm -f /tmp/zcompile.err
+  fi
+fi
+
+# Finally load compinit using the dump — compinit will prefer the compiled .zwc if present.
+# Use -C to skip certain expensive function checks (optional, but speeds startup)
+compinit -d "$ZCOMPDUMP" -C
 
 # Mise
 eval "$($HOME/.local/bin/mise activate zsh)"
