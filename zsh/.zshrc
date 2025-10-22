@@ -1,19 +1,50 @@
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+# zsh options
+setopt extendedglob # Enable advanced pattern matching
+setopt hist_expire_dups_first # Expire older duplicate history entries first
+setopt hist_ignore_dups # Ignore duplicate history entries
+setopt hist_ignore_space # Ignore commands starting with a space
+setopt hist_verify # Show history command before executing
+setopt inc_append_history # Append history lines as they are entered
+setopt share_history # Share history between all sessions
+
+export EDITOR=nvim
+export VISUAL=$EDITOR
+
+# Aliases
+alias ls="${aliases[ls]:-ls} --color=auto"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  alias la='ls -laO'
+else
+  alias la='ls -la'
 fi
+alias grep="${aliases[grep]:-grep} --color=auto"
 
-# Customize to your needs...
+# Mise
+eval "$($HOME/.local/bin/mise activate zsh)"
 
-# Completions
-#
-# Prezto has its own compile dump, if new completions aren't showing up:
-# `rm -rf .zcompdump`
-# `rm -rf .cache/prezto/zcompdump.zwc` to remove the compiled dump
-# `autoload -Uz compinit && compinit`
-# `mv .zcompdump .cache/prezto/zcompdump`
-# restart terminal
-#
+# Go
+export GOPATH="$HOME/.go"
+
+# fzf -- key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+# Starship Prompt
+eval "$(starship init zsh)"
+
+# zsh plugins
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Only add homebrew completions if running macOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
   if [[ $(arch) == 'arm64' ]]; then
@@ -23,24 +54,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 fi
 
-# Aliases
-alias dockerrm='docker rm -v $(docker ps -a -q)'
-alias dockerrmi='docker rmi $(docker images -q)'
-alias dockerrmid='docker rmi $(docker images -q -f "dangling=true")'
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  alias la='ls -laO'
-else
-  alias la='ls -la'
-fi
+# Set zstyle options for completion caching BEFORE compinit
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.cache/zsh
 
-# Mise
-eval "$($HOME/.local/bin/mise activate zsh)"
+zstyle ':completion:*' menu select $  # Enables a menu for multiple completions and automatically shows them
+zstyle ':completion:*' list-prompt ''  # Removes the prompt
+zstyle ':completion:*' list-lines 0  # Show all possibilities
 
-# Go
-export GOPATH="$HOME/Developer/Go"
-
-# Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# Bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+# Initialize the completion system
+autoload -Uz compinit
+compinit
