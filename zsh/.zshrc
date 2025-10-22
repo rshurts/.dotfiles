@@ -1,5 +1,3 @@
-zmodload zsh/zprof
-
 # zsh options
 setopt extendedglob # Enable advanced pattern matching
 setopt hist_expire_dups_first # Expire older duplicate history entries first
@@ -70,5 +68,3 @@ bindkey -M emacs '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-zprof
