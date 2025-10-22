@@ -35,9 +35,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # Set zstyle options for completion caching BEFORE compinit
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.cache/zsh
-
+zstyle ':completion:*' use-cache on # Use a cache
+zstyle ':completion:*' cache-path ~/.cache/zsh # Set the cache location
 zstyle ':completion:*' menu select $  # Enables a menu for multiple completions and automatically shows them
 zstyle ':completion:*' list-prompt ''  # Removes the prompt
 zstyle ':completion:*' list-lines 0  # Show all possibilities
