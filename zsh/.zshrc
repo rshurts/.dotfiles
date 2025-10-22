@@ -1,7 +1,6 @@
 # zmodload zsh/zprof
 
 # zsh options
-setopt extendedglob # Enable advanced pattern matching
 setopt hist_expire_dups_first # Expire older duplicate history entries first
 setopt hist_ignore_dups # Ignore duplicate history entries
 setopt hist_ignore_space # Ignore commands starting with a space
