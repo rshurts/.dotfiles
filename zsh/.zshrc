@@ -1,3 +1,5 @@
+zmodload zsh/zprof
+
 # zsh options
 setopt extendedglob # Enable advanced pattern matching
 setopt hist_expire_dups_first # Expire older duplicate history entries first
@@ -18,6 +20,9 @@ else
   alias la='ls -la'
 fi
 alias grep="${aliases[grep]:-grep} --color=auto"
+alias dockerrm='docker rm -v $(docker ps -a -q)'
+alias dockerrmi='docker rmi $(docker images -q)'
+alias dockerrmid='docker rmi $(docker images -q -f "dangling=true")'
 
 # Mise
 eval "$($HOME/.local/bin/mise activate zsh)"
@@ -33,17 +38,6 @@ eval "$(zoxide init zsh)"
 
 # Starship Prompt
 eval "$(starship init zsh)"
-
-# zsh plugins
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Only add homebrew completions if running macOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -65,3 +59,16 @@ zstyle ':completion:*' list-lines 0  # Show all possibilities
 # Initialize the completion system
 autoload -Uz compinit
 compinit
+
+# zsh plugins
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+zprof
