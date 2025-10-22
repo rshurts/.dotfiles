@@ -11,11 +11,6 @@ Uses GNU stow to symlink dotfiles in this repository to the home directory.
 1. fzf
 1. mise
 
-macOS
-```
-brew install git stow
-```
-
 ## Usage
 
 1. Clone this repo into your home directory.
