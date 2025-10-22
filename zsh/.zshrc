@@ -1,3 +1,5 @@
+zmodload zsh/zprof
+
 # zsh options
 setopt extendedglob # Enable advanced pattern matching
 setopt hist_expire_dups_first # Expire older duplicate history entries first
@@ -27,6 +29,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   if [[ $(arch) == 'arm64' ]]; then
     fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
   else
+    export HOMEBREW_PREFIX="/usr/local"
     fpath=(/usr/local/share/zsh/site-functions $fpath)
   fi
 fi
@@ -41,7 +44,7 @@ zstyle ':completion:*' list-lines 0  # Show all possibilities
 
 # Initialize the completion system
 autoload -Uz compinit
-compinit
+compinit -C # skip check if .zcompdump exists, will need to delete if new completions are added
 
 # Mise
 eval "$($HOME/.local/bin/mise activate zsh)"
@@ -59,12 +62,14 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 # zsh plugins
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+zprof
