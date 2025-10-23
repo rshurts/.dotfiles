@@ -37,10 +37,10 @@ fi
 eval "$($HOME/.local/bin/mise activate zsh)"
 
 # Go
-export GOPATH="$HOME/Developer/Go"
+export GOPATH="$HOME/.go"
 
-# Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# Bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+# fzf -- key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# zoxide
+eval "$(zoxide init zsh)"
