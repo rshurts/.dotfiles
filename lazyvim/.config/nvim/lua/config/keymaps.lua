@@ -29,3 +29,12 @@ key.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- clear highlights on search when pressing <Esc> in normal mode
 key.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
+
+-- toggle relative line numbers
+key.set("n", "<leader>r", function()
+	if vim.wo.relativenumber then
+		vim.wo.relativenumber = false
+	else
+		vim.wo.relativenumber = true
+	end
+end, { desc = "Toggle relative numbers" })

@@ -24,6 +24,16 @@ command Wq wq
 command WQ wq
 command Q q
 
+" toggle line numbers
+function! LineNumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <leader>r :call LineNumberToggle()<cr>
+
 "" Source your .vimrc
 "source ~/.vimrc
 
