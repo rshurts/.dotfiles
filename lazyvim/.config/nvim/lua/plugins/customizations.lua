@@ -34,8 +34,9 @@ return {
         nerd_font_variant = "normal",
       },
       keymap = {
-        -- use standard completion keymap
-        preset = "default",
+        -- use tab to complete
+        preset = "super-tab",
+        -- keep standard completion keymap
         ["<C-y>"] = { "select_and_accept" },
       },
     },
