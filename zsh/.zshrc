@@ -26,6 +26,7 @@ alias dockerrmid='docker rmi $(docker images -q -f "dangling=true")'
 # Only add homebrew completions if running macOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
   if [[ $(arch) == 'arm64' ]]; then
+    export HOMEBREW_PREFIX="/opt/homebrew"
     fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
   else
     export HOMEBREW_PREFIX="/usr/local"
