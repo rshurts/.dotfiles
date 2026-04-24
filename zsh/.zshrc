@@ -76,6 +76,7 @@ export GOPATH="$HOME/.go"
 
 # fzf -- key bindings and fuzzy completion
 source <(fzf --zsh)
+export FZF_DEFAULT_OPTS="--style full --preview 'fzf-preview.sh {}' --bind 'ctrl-y:become(nvim {})'"
 
 # zoxide
 eval "$(zoxide init zsh)"
